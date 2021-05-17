@@ -1,5 +1,6 @@
-# summerschool-2021
-Material for the Midwest Big Data Summer School 2021
+# Midwest Big Data Summer School 2021
+
+## Modules on R and Graphics
 
 There are two ways you can follow along with the materials:
 
