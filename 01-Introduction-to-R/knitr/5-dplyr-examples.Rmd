@@ -1,0 +1,104 @@
+---
+title: "dplyr examples: happiness"
+author: "Heike Hofmann"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+# The Happy data from GSS
+
+The General Social Survey (GSS) has been run by NORC every other year since 1972 to keep track of current opinions across the United States. 
+
+An excerpt of the GSS data called `happy` is available from the `classdata` package:
+
+```{r, eval=FALSE}
+remotes::install_github("heike/classdata")
+```
+
+```{r}
+library(classdata)
+head(happy)
+```
+
+You can find a codebook with explanations for each of the variables at https://gssdataexplorer.norc.org/
+
+---
+class: inverse
+# Your Turn
+
+Load the `happy` data from the `classdata` package.
+
+- how many variables, how many observations does the data have? What do the variables mean? 
+
+- Plot the variable `happy`. Introduce a new variable `nhappy` that has values 1 for `not too happy`, 2 for `pretty happy`, 3 for `very happy` and `NA` for missing values. There are multiple ways to get to that. Avoid `for` loops.
+
+- Based on the newly introduced numeric scores, what is the average happiness of respondents?
+
+---
+class: inverse
+# Your turn
+
+- how does average happiness change over the course of a life time? Is this relationship different for men and women? Draw plots.
+
+- are people now happier than ten years ago? How is happiness related to time?
+
+---
+class: inverse
+# Your Turn
+
+- Are Republicans or Democrats happier? Compare average happiness levels over `partyid`.
+
+- How are financial relations associated with average happiness levels? Is this association different for men and women?
+
+- Find a plot that shows the differences for each one of the summaries.
+
+---
+class: inverse
+# Your turn: asking questions 
+
+
+- What other variable(s) might be associated with happiness? Plot it.
+
+
+---
+
+# Helper functions (1)
+
+- `n()` provides the number of rows of a subset:
+```{r, warning=FALSE, message = FALSE}
+library(dplyr)
+happy %>% group_by(sex) %>% summarise(n = n())
+```
+
+- `tally()` is a combination of `summarise` and `n`
+```{r}
+happy %>% group_by(sex) %>% tally()
+```
+
+---
+
+# Helper functions (2)
+
+- `count()` is a further shortcut of `group_by` and `tally`:
+
+```{r}
+happy %>% count(sex, degree)
+```
+
+- `count()` doesn't introduce any grouping
+
+
+---
+
+# Grouping and Ungrouping
+
+- `ungroup` removes a grouping structure from a data set
+
+- necessary to make changes to a grouping variable (such as re-ordering or re-labelling) 
+
+

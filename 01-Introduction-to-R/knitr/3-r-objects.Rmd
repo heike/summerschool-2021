@@ -1,0 +1,235 @@
+---
+title: "Objects and Data structures in R"
+subtitle: "Midwest Big Data Summer School"
+author: "Heike Hofmann (hofmann@iastate.edu, @heike_hh), Ganesh Krishnan"
+date: "`r Sys.Date()`"
+output:
+  ioslides_presentation:
+    transition: default
+    widescreen: true
+css:
+  styles.css
+---
+
+
+## Data Frames
+
+- Data Frames are the work horse of R objects
+- Structured by rows and columns and can be indexed
+- Each column is a specified variable type
+- Columns names can be used to index a variable
+- Advice for naming variable applys to editing columns names
+- Can be specified by grouping vectors of equal length as columns
+
+- Follow along (copy & paste the code into the console):
+```{r, eval = FALSE}
+curl::curl_download(
+  "https://raw.githubusercontent.com/heike/summerschool-2021/master/01-Introduction-to-R/code/3-r-objects.R",
+  "3-r-objects.R"
+)
+file.edit("3-r-objects.R")
+```
+
+## Data Frame Indexing
+
+- Elements indexed similar to a vector using `[` `]`
+- `df[i,j]` will select the element in the $i^{th}$ row and $j^{th}$ column
+- `df[ ,j]` will select the entire $j^{th}$ column and treat it as a vector
+- `df[i ,]` will select the entire $i^{th}$ row and treat it as a vector
+- Logical vectors can be used in place of i and j used to subset the row and columns
+
+## Adding a new Variable to a Data Frame
+
+- Create a new vector that is the same length as other columns
+- Append new column to the data frame using the `$` operator
+- The new data frame column will adopt the name of the vector
+
+
+This is what we did before in the tips data set:
+```{r, echo=FALSE}
+tips <- read.csv("https://raw.githubusercontent.com/heike/summerschool-2018/master/01-Introduction-to-R/data/tips.csv")
+```
+
+```{r}
+# create rate variable in the tips data set:
+tips$rate <- tips$tip / tips$total_bill
+```
+
+
+## Data Frame Demo
+
+Use Edgar Anderson's Iris Data:
+
+```{r}
+head(iris)
+```
+
+Select Species column (5th column):
+
+```{r}
+iris[,5]
+```
+
+## Demo (Continued)
+
+Select Species column with the `$` operator:
+
+```{r}
+iris$Species
+```
+
+## Demo (Continued)
+
+```{r}
+iris$Species == "setosa"
+```
+
+## Demo (Continued)
+
+```{r}
+iris[iris$Species=="setosa", ]
+```
+
+## Creating our own Data Frame
+
+Create our own data frame using `data.frame` function
+
+```{r}
+mydf <- data.frame(NUMS = 1:5, 
+                   lets = letters[1:5],
+                   vehicle = c("car", "boat", "car", "car", "boat"))
+mydf
+```
+
+##
+
+`expand.grid` allows to quickly create all combinations of levels
+```{r}
+dframe <- data.frame(expand.grid(
+  reps = 1:3, Type = c("Control", "Treatment")))
+dframe
+```
+
+## Renaming columns
+
+The `names` function can be used on the left hand side and the right hand side of an assignment:
+
+```{r}
+names(dframe)
+
+names(dframe)[1] <- "Reps"
+dframe
+```
+
+## Your Turn {data-background=#2a374c}
+
+1. Make a data frame with column 1: 1,2,3,4,5,6 and column 2: a,b,a,b,a,b
+2. Select only rows with value "a" in column 2 using a logical vector
+3. `mtcars` is a built in data set like `iris`: Extract the 4th row of the `mtcars` data.
+
+
+## Examining Objects
+
+- `head(x)` - View top 6 rows of a data frame
+- `tail(x)` - View bottom 6 rows of a data frame
+- `summary(x)` - Summary statistics   
+- `str(x)` - View structure of object  
+- `dim(x)` - View dimensions of object 
+- `length(x)` - Returns the length of a vector
+
+## Examining Objects Example
+
+We can examine the first two values of an object by passing the `n` parameter to the `head` function:
+
+```{r}
+head(iris, n = 2)
+```
+
+What's its structure?
+
+```{r}
+str(iris)
+```
+
+## Your Turn {data-background=#2a374c}
+
+1. View the top 8 rows of mtcars data
+2. What type of object is the mtcars data set?
+3. How many rows are in the mtcars data set? (try finding this using dim or indexing + length)
+4. Summarize the values in each column of the mtcars data set
+
+## Working with Output from a Function
+
+- Can save output from a function as an object
+- Object is generally a list of output objects
+- Can pull off items from the output for further computing
+- Examine object using functions like `str(x)`
+
+## Saving Output Demo
+
+- `t-test` using iris data to see if petal lengths for setosa and versicolor are the same
+- `t.test` function can only handle two groups, so we subset out the virginica species
+
+```{r}
+t.test(Petal.Length ~ Species, data = iris[iris$Species != "virginica", ])
+```
+
+## Demo (Continued)
+
+Save the output of the `t-test` function to an object
+
+```{r}
+tout <- t.test(Petal.Length ~ Species, data = iris[iris$Species != "virginica", ])
+```
+
+Let's look at the structure of this object:
+
+```{r}
+str(tout)
+```
+
+## Demo: Extracting the P-Value
+
+Since this is simply a list, we can use our regular indexing:
+
+```{r}
+tout$p.value
+tout[[3]]
+```
+
+## Importing Data
+
+We often need to import in our own data rather than just using built-in datasets.
+
+- First need to tell R where the data is saved (either by specifying the path or navigating the working directory by setting `setwd()`)
+- For finding a file/path can use a file browser/search by calling `file.choose()`
+- Data read in using R functions such as:
+    - `read.table()` for reading in .txt files
+    - `read.csv()` for reading in .csv files
+- Assign the data to new R object when reading in the file
+
+```{r}
+write.csv(iris, "iris.csv", row.names=FALSE)
+```
+## Exporting Data and Objects
+
+- Similarly to importing, exporting is supported using functions:
+
+    - for data frames use `write.csv` or `write.table`
+    - for more general objects such as lists use `save` (see `?save`). Objects saved with `save` can be loaded using the function `load()`
+    - `save` writes the object in an rda format (short for R data) - this is a R specific binary format (it is small, keeps types and loads fast) 
+
+```{r}
+iris_rda <- iris
+save(iris_rda, file="iris-data.rda")
+rm(iris_rda) # object is gone from environment
+
+load("iris-data.rda") # and now it is back!
+```
+
+
+## Your Turn {data-background=#2a374c}
+
+- Write the iris data set into a csv file on your machine. Check where it appears. For a challenge try to change the location. 
+- Export the `tout` object using the function `save`. Delete `tout` from your working environment by running `rm(tout)`. 
+Load the previously saved object using `load`. If everything went alright, `tout` will be back in your working environment!

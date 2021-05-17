@@ -37,13 +37,19 @@ knitr::opts_chunk$set(
 
 
 
-1:00 -- 4:00
 
+1:00 - 2:20 
 - Setup: Installation of R and RStudio
 
 - First Example
 
+- Some R basics
 
+2:30 - 4:00
+
+- the tidy verse
+
+- examples with the tidyverse
 
 # What is R? ... and what does it do?
 
