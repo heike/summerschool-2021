@@ -8,7 +8,7 @@ There are two ways you can follow along with the materials:
     - double-click the file `Start-here.Rproj` to start RStudio with the right material 
     - go into folder `01-introduction-to-R` and open the file `0-getting started.Rmd` in the `knitr` folder.
 - **hands-on** (alternative): 
-    - in case you are experiences problems with the installation, you can make use of the RStudio cloud server: XXXX
+    - in case you are experiences problems with the installation, you can make use of the [RStudio cloud server](https://rstudio.cloud/spaces/66686/project/2558446?idle=1621215820362).
 - **relaxed approach**: follow along the slides at https://heike.github.io/summerschool-2021/
 
 
