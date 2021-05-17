@@ -1,0 +1,309 @@
+---
+title: "R Basics"
+subtitle: "Midwest Big Data Summer School"
+author: "Heike Hofmann (hofmann@iastate.edu, @heike_hh)"
+date: "`r Sys.Date()`"
+output:
+  ioslides_presentation:
+    transition: default
+    widescreen: true
+css:
+  styles.css
+---
+
+
+
+## R is an Overgrown Calculator
+
+- Follow along (copy & paste the code into the console):
+```{r, eval = FALSE}
+curl::curl_download(
+  "https://raw.githubusercontent.com/heike/summerschool-2018/master/01-Introduction-to-R/code/2-basics.R",
+  "2-basics.R"
+)
+file.edit("2-basics.R")
+```
+
+## R is an Overgrown Calculator
+
+
+```{r}
+# Addition and Subtraction
+2 + 5 - 1
+
+# Multiplication
+109*23452
+
+# Division
+3/7
+```
+
+
+## More Calculator Operations
+
+```{r}
+# Integer division
+7 %/% 2
+
+# Modulo operator (Remainder)
+7 %% 2
+
+# Powers
+1.5^3
+```
+
+## Math Functions
+
+- Exponentiation 
+    - `exp(x)`
+- Logarithms
+    - `log(x)`
+    - `log(x, base = 10)`
+- Trigonometric functions
+    - `sin(x)`
+    - `asin(x)`
+    - `cos(x)`
+    - `tan(x)`
+    
+## Creating Objects
+
+We can create an object using the assignment operator `<-`
+
+```{r}
+x <- 5
+y <- 21
+```
+
+We can then perform any functions on these objects:
+
+```{r}
+log(x)
+y^2
+```
+
+## Rules for Variable Creation
+
+- Variable names can't start with a number
+- Variables in R are case-sensitive
+- Some common letters are used internally by R and should be avoided as variable names (c, q, t, C, D, F, T, I)
+- There are reserved words that R won't let you use for variable names. (for, in, while, if, else, repeat, break, next)
+- R will let you use the name of a predefined function __without any warning__.  
+
+<br>
+<br>
+<br>
+__Pro-tip:__ before introducing a new object, type it in the console to check that it is not yet taken
+
+## Vectors
+
+A variable usually consists of more than a single value. We can create a **vector** using the `c` (combine) function:
+
+```{r}
+y <- c(1, 5, 3, 2)
+```
+
+Operations will then be done element-wise:
+
+```{r}
+y / 2
+```
+
+## Getting Help
+
+We will talk MUCH more about vectors in a bit, but for now, let's talk about a couple ways to get help. The primary function to use is the `help` function. Just pass in the name of the function you need help with:
+
+```{r, eval=FALSE}
+help(head)
+```
+
+The `?` function also works:
+
+```{r, eval=FALSE}
+?head
+```
+
+Googling for help is a bit hard. Searches of the form  R + CRAN + <your query> usually get good results
+
+## R Reference Card
+
+We will pass you out a copy, but you can download the reference card from:
+
+http://cran.r-project.org/doc/contrib/Short-refcard.pdf
+
+Having this open or printed off and near you while working is helpful.
+
+## Your Turn {data-background=#2a374c}
+
+Using the R Reference Card at https://cran.r-project.org/doc/contrib/Short-refcard.pdf
+ (and the Help pages, if needed), do the following:
+
+1. Find out how many rows and columns the `iris' data set has.  Figure out at least 2 ways to do this.
+*Hint: "Variable Information" section on the first page of the reference card!*
+
+2. Use the `rep` function to construct the following vector:  1 1 2 2 3 3 4 4 5 5
+*Hint: "Data Creation" section of the reference card*
+
+Give this vector the name `x`
+
+3. Square each element in the vector `x`, then calculate the average value.
+
+## Data Frames Introduction
+
+- `penguins` is a data frame.
+- Data frames hold data sets
+- Columns can have different types - like an Excel spreadsheet
+- Each column in a data frame is a vector - so each column needs to have values that are all the same type.
+- We can access different columns using the `$` operator.
+
+```{r}
+penguins <- read.csv("https://raw.githubusercontent.com/heike/summerschool-2021/main/01-Introduction-to-R/data/penguins.csv", stringsAsFactors = TRUE)
+
+species <- penguins$species
+bill_length <- penguins$bill_length_mm
+```
+
+## More about Vectors
+
+A vector is a list of values that are all the same type. We have seen that we can create them using the `c` or the `rep` function. We can also use the `:` operator if we wish to create consecutive values:
+
+```{r}
+a <- 10:15
+a
+```
+
+We can extract the different elements of the vector like so (note, unlike python indexing starts with 1):
+
+```{r}
+bill_length[3]
+```
+
+## Indexing Vectors
+
+We have seen that we can access individual elements of the vector. But **indexing** is a lot more powerful than that:
+
+```{r}
+head(bill_length)
+
+bill_length[c(1, 3, 5)]
+bill_length[1:5]
+```
+
+## Logical Values
+
+- R has built in support for logical values
+- TRUE and FALSE are built in.  T (for TRUE) and F (for FALSE) are supported but can be modified
+- Logicals can result from a comparison using
+    - $<$
+    - $>$
+    - $<=$
+    - $>=$
+    - $==$
+    - $!=$
+    
+## Indexing with Logicals
+
+We can index vectors using logical values as well:
+
+```{r}
+x <- c(2, 3, 5, 7)
+x[c(TRUE, FALSE, FALSE, TRUE)]
+x > 3.5
+x[x > 3.5]
+```
+
+## Logical Examples
+
+```{r}
+bill_length <- penguins$bill_length
+head(bill_length)
+short_bills <- bill_length < 35
+species[short_bills]
+```
+
+## Your Turn {data-background=#2a374c}
+
+```{r, eval = FALSE}
+tips <- read.csv("https://raw.githubusercontent.com/heike/summerschool-2021/master/01-Introduction-to-R/data/tips.csv")
+```
+
+The `tips` data set consists of 244 parties being served at a restaurant.
+
+1. Calculate the rate that each party tipped, i.e. fill the blanks in the statement: `tips$rate <- ___ / ___ * 100`
+
+
+2. Find out how many people tipped over 20%.
+
+*Hint: if you use the `sum` function on a logical vector, it'll return how many TRUEs are in the vector:*
+```{r}
+sum(c(TRUE, TRUE, FALSE, TRUE, FALSE))
+```
+
+3. **More Challenging**: Calculate the sum of the total bills of anyone who tipped over 20%
+
+
+## Data Types in R
+
+- Can use `mode` or `class` to find out information about variables
+- `str` is useful to find information about the structure of your data
+- Many data types: numeric, integer, character, Date, and factor most common
+    
+```{r}
+str(penguins)
+```
+
+## Some useful functions
+
+There are a whole variety of useful functions to operate on vectors. A couple of the more common ones are `length`, which returns the length (number of elements) of a vector, and `sum`, which adds up all the elements of a vector.
+
+```{r}
+x <- bill_length[1:5]
+length(x)
+sum(x)
+```
+
+## Statistical Functions
+
+Using the basic functions we've learned it wouldn't be hard to compute some basic statistics.
+
+```{r}
+(n <- length(bill_length))
+(meanlength <- sum(bill_length) / n)
+(standdev <- sqrt(sum((bill_length - meanlength)^2) / (n - 1)))
+```
+
+But we don't have to.
+
+## Built-in Statistical Functions
+
+```{r}
+mean(bill_length)
+sd(bill_length)
+summary(bill_length)
+quantile(bill_length, c(.025, .975), na.rm = TRUE)
+```
+
+## Element-wise Logical Operators
+
+- `&` (elementwise AND)
+- `|` (elementwise OR)
+
+```{r}
+c(T, T, F, F) & c(T, F, T, F)
+c(T, T, F, F) | c(T, F, T, F)
+```
+
+##
+
+```{r}
+# How many of the short billed penguins are male?
+id <- (bill_length <35  & penguins$sex == "male")
+penguins[id,]
+```
+
+## Your Turn 
+
+1. Read up on the dataset `diamonds` (`?diamonds`) in the `ggplot2` package
+2. Plot price by carat (use `qplot` - go back to the motivating example for help with the syntax)
+3. Create a variable `ppc` for price per carat. Store this variable as a column in the diamonds data
+4. Make a histogram of all ppc values that exceed $10000 per carat.
+5. Explore any other interesting relationships you find

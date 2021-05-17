@@ -1,0 +1,219 @@
+---
+title: "First Look"
+subtitle: "Midwest Big Data Summer School"
+author: "Heike Hofmann (hofmann@iastate.edu, @heike_hh), Andrew Maloney"
+date: "`r Sys.Date()`"
+output:
+  ioslides_presentation:
+    transition: default
+    widescreen: true
+css:
+  styles.css
+---
+
+## Motivating Example
+
+```{setup, echo=FALSE}
+knitr::opts_chunk(warning = FALSE)
+```
+
+- Kick things off by looking at a real data set in R
+- Goal: get the flavor of using R for data management and exploration
+- Don't worry about understanding all the coding right away
+- We will come back to see how everything works in detail
+
+## Palmer Penguins
+
+- Allison Horst: data on 344 penguins from three different species and three islands over three years
+- https://allisonhorst.github.io/palmerpenguins/
+
+- data consists of observations on nesting penguins 
+- several variables recorded:
+    - body measures of penguins: bill length, bill depth, flipper length, and body mass
+    - year
+    - species
+    - location
+    - penguin's sex (determined by blood test)
+- __Primary Question__: Can sex be determined without blood test?
+
+## Follow along 
+
+Copy & paste the code into the console:
+```{r, eval = FALSE}
+curl::curl_download(
+  "https://raw.githubusercontent.com/heike/summerschool-2021/master/01-Introduction-to-R/code/1-example.R",
+  "1-example.R"
+)
+file.edit("1-example.R")
+```
+
+
+## First look at data in R
+
+Lets use R to look at the top few rows of the data set. First, we load the penguins data  `read.csv`:
+
+```{r}
+penguins <- read.csv("https://raw.githubusercontent.com/heike/summerschool-2021/main/01-Introduction-to-R/data/penguins.csv", stringsAsFactors = TRUE)
+```
+
+Now, we use the `head` function to look at the first 6 rows of the data:
+
+```{r}
+head(penguins)
+```
+
+## Penguins Data Attributes
+
+How big is this data set and what types of variables are in each column?
+
+```{r}
+str(penguins)
+```
+
+- python has pandas ... R has data.frames
+- data.frames are lists of variables 
+
+
+## Penguins Variables
+
+Let's get a summary of the values for each variable in penguins:
+
+```{r}
+summary(penguins)
+```
+
+# How do penguins' body measurements relate to each other?
+
+## Scatterplots: bill length versus flipper length 
+
+First, we need to install and load `ggplot2`:
+
+```{r, eval=FALSE}
+install.packages("ggplot2")
+library(ggplot2)
+library(dplyr)
+```
+
+```{r, echo=FALSE, message = FALSE, warning = FALSE}
+library(ggplot2)
+library(dplyr)
+```
+
+```{r, fig.height=3, fig.width=3, warning = FALSE}
+penguins %>% ggplot(aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point()
+```
+
+## 
+
+```{r, fig.height=3, fig.width=3, echo = FALSE, warning = FALSE}
+penguins %>% ggplot(aes(x = bill_length_mm, y = flipper_length_mm)) + geom_point()
+```
+
+There seem to be some clusters
+
+Correlation is below 0.70, but there is a positive linear relationship in some clusters
+```{r}
+cor(penguins$bill_length_mm, penguins$flipper_length_mm, use = "pairwise")
+```
+
+
+## Color points
+
+Color  points by sex of the penguins, each of the clusters seem to be split about 50/50.
+
+```{r, fig.height=3.5, fig.width=4, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm, colour = sex)) + 
+  geom_point()
+```
+
+## Closer look
+
+Clusters are related to different species
+
+```{r, fig.height=3.5, fig.width=4, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
+  geom_point()
+```
+
+## Meet the Penguins!
+
+<img src="https://cran.r-project.org/web/packages/palmerpenguins/readme/man/figures/lter_penguins.png"  width="850">
+
+Artwork by @allison_horst
+
+## Clusters of penguins
+
+```{r, fig.height=3.5, fig.width=4, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, y = flipper_length_mm, colour = species)) + 
+  geom_point() +
+  scale_color_manual(values = c("darkorange","purple","cyan4")) 
+```
+
+## Back to trying to determine gender
+
+Lets look distribution of body mass with a histogram
+
+```{r, fig.height=4, fig.width=4, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = body_mass_g)) + geom_histogram(binwidth = 100)
+```
+## Back to trying to determine sex of penguins
+
+Lets look distribution of body mass with a histogram colored by sex
+
+```{r, fig.height=4, fig.width=4, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = body_mass_g, fill= sex)) + geom_histogram(binwidth = 100)
+```
+
+
+## Body mass and sex of penguins
+
+We can use facetting by species 
+
+```{r, fig.height=4, fig.width=10, warning = FALSE}
+penguins %>% 
+  ggplot(aes(x = body_mass_g, fill= sex)) + geom_histogram(binwidth = 100) +
+  facet_grid(.~species)
+```
+
+## Body mass and sex of penguins
+
+We can use facetting by species 
+
+```{r, fig.height=4, fig.width=10, warning = FALSE}
+penguins %>% filter(!is.na(sex)) %>%
+  ggplot(aes(x = body_mass_g, fill= sex)) + geom_density(alpha = 0.5) +
+  facet_grid(.~species)
+```
+
+## 
+
+Look at the average body mass for Gentoo penguins separately:
+
+```{r}
+gentoo <- filter(penguins, species=="Gentoo")
+
+mean(gentoo$body_mass_g[gentoo$sex == "male"], na.rm=TRUE)
+mean(gentoo$body_mass_g[gentoo$sex == "female"], na.rm=TRUE)
+```
+
+
+## Statistical Significance
+
+There is a difference but is it statistically significant?
+
+```{r}
+t.test(body_mass_g ~ sex, data = gentoo)
+```
+
+## Your Turn {data-background=#2a374c}
+
+Try playing with chunks of code from this session to further investigate the penguins data:
+
+1. What is the relationship between penguins bill length and bill depth? What is the correlation? Would you expect the same correlation for all species?
+2. What is the median (`median`) bill depths for Adelie and Gentoo penguins? (make sure to use `na.rm = TRUE` to exclude missing values)
+3. Is body mass discriminating between male and female Adelie penguins as well as Gentoo penguins?
