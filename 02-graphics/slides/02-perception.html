@@ -17,6 +17,8 @@ class: center, middle, inverse, title-slide
 ---
 
 
+
+
 class:middle,center,inverse
 # Introduction
 ---
@@ -423,6 +425,11 @@ Small objects or thin lines need more contrast than larger areas
 class: inverse
 ## Your Turn 
 
+
+```r
+data(diamonds)
+```
+
 - In the diamonds data, clarity and cut are ordinal, while price and carat are continuous
 
 - Find a graphic that gives an overview of these four variables while respecting their types
@@ -432,11 +439,11 @@ class: inverse
 class: inverse
 ## Your Turn 2
 
-The `movies` dataset contains information from IMDB.com including ratings, genre, length in minutes, and year of release.
+The `movies` data set contains information from IMDB.com including ratings, genre, length in minutes, and year of release.
 
 
 ```r
-movies &lt;- read.csv("http://heike.github.io/rwrks/02-r-graphics/data/MovieSummary.csv")
+movies &lt;- read.csv("http://heike.github.io/summerschool-2021/02-graphics/data/MovieSummary.csv")
 ```
                    
 

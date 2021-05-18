@@ -632,10 +632,10 @@ data(diamonds)
 class: inverse
 ## Your Turn 2
 
-The `movies` dataset contains information from IMDB.com including ratings, genre, length in minutes, and year of release.
+The `movies` data set contains information from IMDB.com including ratings, genre, length in minutes, and year of release.
 
 ```{r, echo = TRUE, purl = T}
-movies <- read.csv("http://heike.github.io/2021-dspg-summerschool/02-graphics/data/MovieSummary.csv")
+movies <- read.csv("http://heike.github.io/summerschool-2021/02-graphics/data/MovieSummary.csv")
 ```
                    
 
