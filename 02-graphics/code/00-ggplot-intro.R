@@ -132,15 +132,12 @@ ggplot(
 ## ----plots-4, fig.align='top', fig.height=5, fig.width=15, echo = F-------------------------------------------------------------------------------------------------------------
 p1 <- ggplot(diamonds, aes(cut, fill = cut)) +
   geom_bar() +
-  labs(title = "Bar Chart", subtitle = "Cartesian coordinates") +
-  scale_fill_locuszoom()
+  labs(title = "Bar Chart", subtitle = "Cartesian coordinates") 
 p2 <- ggplot(diamonds, aes(factor(1), fill = cut)) +
   geom_bar(width = 1) +
-  labs(x = "", title = "Fill-Bar", subtitle = "Cartesian coordinates") +
-  scale_fill_locuszoom()
+  labs(x = "", title = "Fill-Bar", subtitle = "Cartesian coordinates")
 p3 <- ggplot(diamonds, aes(factor(1), fill = cut)) +
   geom_bar(width = 1) +
   coord_polar(theta = "y") +
-  labs(x = "", title = "Fill-Bar", subtitle = "Polar coordinates") +
-  scale_fill_locuszoom()
+  labs(x = "", title = "Fill-Bar", subtitle = "Polar coordinates")
 grid.arrange(p1, p2, p3, ncol = 3, nrow = 1)
