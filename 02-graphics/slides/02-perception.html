@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Graphical Insights from Data:  Perception</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Heike Hofmann &amp; Susan Vanderplas" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Graphical Insights from Data: <br/>Perception
+### Heike Hofmann &amp; Susan Vanderplas
+
+---
+
+
+class:middle,center,inverse
+# Introduction
+---
+## What do you see?
+
+.center[
+![](https://www.moillusions.com/wp-content/uploads/2009/12/Mysterious-Dalmatian-Optical-Illusion.jpg)
+]
+.bottom[Image source: https://www.moillusions.com/mysterious-dots-optical-illusion/]
+
+---
+## What do you see?
+
+.center[
+![](images/dalmation.png)
+]
+
+???
+
+Vision, in general, involves a *lot* of unconscious pattern recognition. If we can harness that power, we can show people data in a way that doesn't require a lot of thought for them to engage with the data.
+
+---
+## It's not just an illusion - it's a photo
+
+.center[
+&lt;img src="images/dalmation_life_1965.png" alt="1965 Life magazine cover showing the dalmation illusion" width="50%"/&gt;
+]
+
+.bottom[Life Magazine, 19 Feb 1965]
+
+---
+## Why Graphics Matter
+Graphics are a form of **external cognition** that allow us to think about the **data** rather than the **chart**
+
+--
+
+Good graphics take advantage of how the brain works
+
+- preattentive processing
+
+- perceptual grouping
+
+- awareness of visual limitations
+
+---
+## Good Graphics
+
+In good graphics, the 
+
+1. graph form
+2. data (and structure)
+3. aesthetics
+
+all work together to pass information to the brain via the visual system.
+
+--
+
+The **structure** and **aesthetics** used to create the chart should contribute to the understanding of what is being shown!
+
+---
+## Bad Graphics
+
+&lt;iframe src="https://xkcd.com/1138/#comic" width="800px" height="560px"/&gt;
+
+???
+
+Of course, even decent visualizations can't compensate for lousy data... or rather, chart designers who aren't thinking about how to represent the data well.
+
+---
+## Bad Graphics
+
+
+.center[&lt;img alt="Top 500 Supercomputers by Processor Family" src = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Processor_families_in_TOP500_supercomputers.svg/1280px-Processor_families_in_TOP500_supercomputers.svg.png" width = "80%"/&gt;]
+
+
+.bottom[https://en.wikipedia.org/wiki/File:Processor_families_in_TOP500_supercomputers.svg]
+
+???
+
+But perfectly reasonable data can also be ruined by bad aesthetic choices.
+
+As with anything, graphics require a combination of "art" and "science" - you not only have to use the best method to display the data (which this isn't, necessarily), you also have to use some judgment as to how to show what you're hoping to show... and this is a good example of what happens when that doesn't happen. 
+
+
+
+---
+## Spot the Difference
+
+&lt;img src="02-perception_files/figure-html/preattentive1-1.png" width="49.5%" /&gt;&lt;img src="02-perception_files/figure-html/preattentive1-2.png" width="49.5%" /&gt;
+
+---
+## Spot the Difference
+
+&lt;img src="02-perception_files/figure-html/preattentive2-1.png" width="49.5%" /&gt;&lt;img src="02-perception_files/figure-html/preattentive2-2.png" width="49.5%" /&gt;
+
+---
+## Preattentive perception 
+
+- Occurs automatically (no effort)
+
+- Color, shape, angle 
+
+- Combinations of preattentive features require attention
+    - Unless you double-encode    
+    (use different features for the same variable)
+
+
+--
+
+Using preattentive features reduces the amount of work your viewer has to expend to understand your chart
+
+---
+## What do you see?
+
+.center[![](images/IllusoryContour.png)]
+
+???
+
+What do you see here? 3 pac-men shapes and 3 acute angles? No? 
+
+I see 3 circles, a triangle with a black outline, and a white triangle with no outline.  But... that's not really what's there, is it?
+
+I'll talk next about the Gestalt laws, but if you can't remember them, just remember this saying - "The whole is greater than the sum of the parts" - just as here, what we see is more orderly than what is actually there.
+
+---
+class: center, middle, inverse
+
+# Gestalt Principles
+### What sorts of relationships are inferred, and under what circumstances? 
+
+---
+## Gestalt Laws of Perception
+
+.center[![](images/gestalt.jpg)]
+
+???
+
+The Gestalt laws are a set of rules for how we interpret ambiguity in the visual scene. 
+
+The law of Closure says that it's easier to interpret things if you imagine them as a closed figure - it's more likely that a closed figure is for instance obstructed, than that it is a set of more complex, less meaningful figures. This is sometimes also stated as the "law of good figure"
+
+the law of Proximity says that things that are close together are likely part of the same unit. So you might interpret things as a dalmation instead of a series of blobs of black ink. 
+
+The law of continuation says that figures with edges that are smooth are more likely to be continuous than things with edges that are sharp angles. 
+
+the law of similarity says that things are likely to be viewed as part of a group if they look similar. 
+
+Then, the law of figure/ground helps explain why we see both the tree and the AL figure combination here - we have contextual information that helps us simplify the picture into two groups - the figure (the tree), and the background (the AL); thsi also helps us separate the AL from the white background behind it. 
+
+There are a few other gestalt laws, but these are the main ones.
+
+Now, let's talk about how these laws apply to charts! I swear, I didn't forget that I am supposed to be talking about data visualization.
+
+---
+## Gestalt Laws in Data Visualization
+
+&lt;img src="02-perception_files/figure-html/unnamed-chunk-1-1.png" width="100%" /&gt;
+
+- Proximity
+
+- Similarity
+
+
+---
+## Gestalt Laws in Data Visualization
+
+&lt;img src="02-perception_files/figure-html/unnamed-chunk-2-1.png" width="100%" /&gt;
+
+---
+## Gestalt Laws in Data Visualization
+
+
+&lt;img src="02-perception_files/figure-html/unnamed-chunk-3-1.png" width="100%" /&gt;
+
+- Good continuation
+
+---
+## Which one is different?
+
+.center[&lt;img src="images/set-48-k-5-sdline-0.45-sdgroup-0.25-TREND.png" alt="Lineup with trend lines" width = "70%"/&gt;]
+
+---
+## Which one is different?
+
+.center[&lt;img src="images/set-48-k-5-sdline-0.45-sdgroup-0.25-COLOR.png" alt="Lineup with color lines" width = "70%"/&gt;]
+
+---
+## Plot Annotations Matter!
+
+.pull-left[
+
+.center[![](images/set-48-k-5-sdline-0.45-sdgroup-0.25-TREND.png)]
+
+- Plot 12: 59.1% 
+- Plot 5:  9.1% 
+- Other plots: 31.7% 
+
+]
+.pull-right[
+
+.center[![](images/set-48-k-5-sdline-0.45-sdgroup-0.25-COLOR.png)]
+
+- Plot 12: 9.7%
+- Plot 5: 29.0% 
+- Plot 18: 32.3% 
+- Other plots: 29.0% 
+
+]
+
+???
+
+Add annotations to your plots based on what you want to emphasize. If you want to show the trend (or deviations from it), add a line and maybe a confidence band. If you want to show clustering, use ellipses and color and/or shape. 
+
+What you add to the plot helps to determine what people will see in the data!
+
+---
+class:middle,center,inverse
+# Visual Limitations
+
+
+---
+## Visual Limitations
+
+- Not all graphical representations are equally accurate
+
+- Optical illusions 
+
+- Designing plots for disabilities
+
+- Color choices
+
+---
+## Accuracy of Graphical Judgements
+
+1. Position along a common scale (most accurate)
+    - scatter plot
+2. Position along nonaligned scale
+    - multiple scatter plots
+3. Length
+    - bar chart
+4. Angle, Slope
+    - pie chart
+5. Area
+    - bubble chart
+6. Volume, Density, Color saturation
+    - heatmap
+7. Color hue (least accurate)
+
+
+???
+
+When you design a visualization, try to make the most important variables represented by dimensions that are accurate.
+
+In some cases, we only care about relative accuracy - for those, things like color saturation are fine for encoding information. 
+
+You may have heard people talk about how awful pie charts are - that's because anything that can be put into a pie chart can also be put into a bar chart, which will be read more accurately. 
+
+---
+## Optical Illusions
+
+![](images/curve-difference.png)
+
+???
+
+We're really bad at judging vertical distance, as well. If you need to show the difference between two curves, you should attempt to find a different way to do it than showing both curves on the same chart - for instance, plot the difference alongside the two curves.
+
+
+---
+## Designing for Accessibility
+
+- Low visual acuity:
+    - High contrast (bright/dark)
+    - large font size
+    - textures/patterns can be hard to make out
+
+- Colorblindness:
+    - Safest: design for a black-and-white photocopier
+    - Avoid rainbow gradients
+    - If you need a 2-color gradient, use blue/purple - white - orange (safe for most types of colorblindness)
+    
+- R packages for accessibility
+    - ajrgodfrey/BrailleR - translate plots into text descriptions for screen readers
+    - sonify - represent data using sound
+    - gt - tables with metadata that is easy for screen readers
+
+???
+
+Unfortunately, there is relatively little research on other disabilities + statistical graphics
+
+---
+## Color
+
+- **Hue**: shade of color (red, orange, yellow...)
+
+- **Intensity**: amount of color
+
+- Both color and hue are pre-attentive. Bigger contrast corresponds to faster detection.
+
+- Use color to your advantage
+
+- When choosing color schemes, we will want mappings from data to color that are not just numerically but also ***perceptually*** uniform
+
+- Distinguish between sequential scales and categorical scales
+
+---
+
+## Color
+
+Color is context-sensitive: A and B are the same intensity and hue, but appear to be different.
+
+![Edward Adelson’s checkershadow illusion](images/shadow-illusion3.jpg)
+
+---
+
+## Ordering Variables
+
+Which is bigger?
+
+- Position: higher is bigger (y), items to the right are bigger (x)
+- Size, Area
+- Color: not always ordered. More contrast = bigger.
+- Shape: Unordered. 
+
+![](02-perception_files/figure-html/unnamed-chunk-4-1.png)&lt;!-- --&gt;
+
+---
+class: center, middle, inverse
+
+# Aesthetics in `ggplot2`: Scales
+
+---
+
+## Aesthetics in `ggplot2`
+
+**Aesthetics**: features such as color, shape, and size that map other characteristics to structural features
+
+**Scales** map data values to the visual values of an aesthetic  
+
+ - to change a mapping, add a new scale
+
+&lt;img src="images/scales1.png" width="368" style="display: block; margin: auto;" /&gt;
+
+---
+## Scales
+
+.pull-left[
+&lt;img src="images/scales2.png" width="367" /&gt;
+]
+.pull-right[
+&lt;img src="images/scales3.png" width="368" /&gt;
+]
+
+---
+## Gradients
+
+Qualitative schemes: no more than 7 colors
+
+
+![](02-perception_files/figure-html/unnamed-chunk-8-1.png)&lt;!-- --&gt;
+
+&lt;small&gt;
+Can use `colorRampPalette()` from the RColorBrewer package to produce larger palettes by interpolating existing ones
+&lt;/small&gt;
+
+![](02-perception_files/figure-html/unnamed-chunk-9-1.png)&lt;!-- --&gt;
+
+Quantitative schemes: use color gradient with only one hue for positive values
+
+![](02-perception_files/figure-html/unnamed-chunk-10-1.png)&lt;!-- --&gt;
+
+---
+
+## More Gradients
+
+Quantitative schemes: use color gradient with two hues for positive and negative values. Gradient should go through a light, neutral color (white)
+
+![](02-perception_files/figure-html/unnamed-chunk-11-1.png)&lt;!-- --&gt;
+
+Small objects or thin lines need more contrast than larger areas
+
+---
+## Factors vs. Continuous variables
+
+- Factor variable:
+    - `scale_colour_discrete`
+    - `scale_colour_brewer(palette = ...)`
+- Continuous variable:
+    - `scale_colour_gradient` (define low, high values)
+    - `scale_colour_gradient2` (define low, mid, and high values)
+    - Equivalents for fill: `scale_fill_...`
+
+&lt;img src="02-perception_files/figure-html/unnamed-chunk-12-1.png"  /&gt;
+
+---
+## Color in ggplot2
+
+- There are packages available (`ggsci`, `viridis`, `wesanderson`, `RColorBrewer`) that have color schemes for any occasion.
+
+&lt;img src="02-perception_files/figure-html/color-ggplot2-1.png" width="100%" /&gt;
+  
+  
+
+---
+class: inverse
+## Your Turn 
+
+- In the diamonds data, clarity and cut are ordinal, while price and carat are continuous
+
+- Find a graphic that gives an overview of these four variables while respecting their types
+
+
+---
+class: inverse
+## Your Turn 2
+
+The `movies` dataset contains information from IMDB.com including ratings, genre, length in minutes, and year of release.
+
+
+```r
+movies &lt;- read.csv("http://heike.github.io/rwrks/02-r-graphics/data/MovieSummary.csv")
+```
+                   
+
+- Explore the differences in length, rating, etc. in movie genres over time
+- Hint: use facetting!
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

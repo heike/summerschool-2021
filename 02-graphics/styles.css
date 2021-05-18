@@ -1,0 +1,148 @@
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.2.2
+*/
+body {font:13px arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}
+table {font-size:inherit;font:100%;}select, input, textarea {font:99% arial,helvetica,clean,sans-serif;}pre, code {font:115% monospace;*font-size:100%;}body * {line-height:1.5em;}
+
+* {
+	margin: 0; padding:0; 
+	font-family: Verdana, Tahoma, sans-serif; 
+}
+
+body {margin: 1em;}
+
+h1, h2, h3, h4, h5, h6, p, pre, blockquote, 
+label, ul, ol, dl, li, fieldset, address { margin: 1em 0; }
+li, dd { margin-left:5%; }
+fieldset { padding: .5em; }
+code, pre {
+  font-family: monospace; 
+  font-size: 100%;
+  border: 1px solid #ccc;
+  background-color: #64A8D1;
+}
+
+small {font-size: 0.8em;}
+blockquote {margin: 1em 1em; font-size: 0.9em;}
+
+code strong {font-family: monospace;}
+
+a:link, a:visited {color: #513058; }
+
+.movie, a img {border: 1px solid #ccc; padding: 2px;}
+
+h1 {font-size: 4em; font-weight: normal; margin-bottom: 0.4em; text-transform: lowercase;}
+h2 {font-size: 0.9em; font-weight: bold}
+h3 {font-size: 0.9em; font-weight: bold}
+
+#navbar {
+	position: absolute;
+	left: 1.5em;
+	top: 5em;
+	width:  8.9%;
+	font-size:  0.85em;
+	padding: 0 0.5em 0 0;
+}
+#navbar * { margin: 0 0 0.25em 0; text-align:  right;}
+#navbar h2 {border:  none; font-size:  1em; padding:  0; border-top:  1px solid #ccc; font-weight: normal; margin-top: 0.65em; padding-top:  0.35em;}
+#navbar ul {list-style:  none;}
+
+#wrap {margin: 3em 15%;}
+
+#footer {margin: 0 15%; font-size:0.85em; border-top: 1px solid #ccc;  padding: 0.5em;}
+#footer p {margin: 0.5em 0;}
+
+#examples {width: 150px; float: right; margin: 5px; margin-right: -3em;}
+#examples img {margin-bottom: 10px;}
+#examples a:hover {background-color: #fff;}
+#examples a:hover img {border-color: #333;}
+
+html {background: url("/images/spot.gif") no-repeat 95% 50px;}
+
+/* Colour inspiration: 
+http://colorschemedesigner.com/#
+
+Primary Color:
+136494	28516A	053A59	5FAEDD	CAE4F3
+medium  grey    dark    light   x-light
+
+Complementary Color:
+E98812	A67539	8C4F05	F8B562	F8D1A1*/
+
+
+
+a:link, a:visited {color: #136494;}
+a:hover {background-color: #CAE4F3 }
+
+/*
+td.caption {font-size: 0.9em; color: #333; padding: 4px; background-color:#e9e9e9;}
+*/
+
+.box {
+	margin: auto;
+	border-left: 5px solid #668040;
+	background-color: #64A8D1;
+}
+.box p {margin: 0.3em 0;}
+
+.box, h1, h2 {
+	padding: 1px 0 1px 5px;
+}
+
+h1 {
+  color: #28516A;
+	border-left: 8px solid #8C4F05;
+	margin-left: -23px;
+	padding-left: 10px;
+}
+
+h2 {
+  color: #053A59;
+	border-left: 3px solid #A67539;
+	margin-left: -8px;
+}
+
+h1 {margin-bottom: 0;}
+h2.subhead {margin-top: 0; border-left: 0; margin-bottom: 2em;}
+
+@media print {
+	html * {font-size: 10pt;}
+	h1 {font-size: 14pt; margin: 0 0 0.5em 0;}
+	#navbar {display: none;}
+	#footer {margin: 1em 0 0 0;}
+	#wrap {margin: 0;}
+	
+}
+
+/* Table formatting -------------------- */
+
+table {border-collapse: collapse; margin-bottom: 1.5em;}
+td {vertical-align: top; padding-right: 1em;}
+th {vertical-align: bottom; padding-right: 1em;}
+th {font-weight: bold; text-align: left; font-size: 0.8em; border-bottom: 1px solid #F8B562;}
+tr.topic {font-weight: bold; text-align: left;  color: #8C4F05;}
+tr td {padding-bottom: 0.25em;}
+tr.first td {padding-top: 1em;}
+
+/* Home page ------------------------- */ 
+
+#contact {
+  float: right;
+  width: 15em;
+  padding: 0 0 0 5px;
+  margin-left: 1em;
+  border-left: 3px solid #668040;
+}
+#contact ul {list-style: none; margin: 0;}
+#contact li {margin: 0.5em 0 0 0;}
+#contact h2 {margin: 0 0 0 0; border-left: none; padding-left: 0;}
+
+
+/* Teaching --------------------------- */
+
+tr.topic td {padding-top: 1em; font-weight: bold; font-size: 0.9em; }
+.last { border: 2px solid #804070; padding: 0.5em; background-color: #fafafa;}
+.last h2 {margin: 0; padding: 0; border: none;}

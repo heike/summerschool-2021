@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Graphics with ggplot2:  Motivation and Introduction</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Heike Hofmann &amp; Susan Vanderplas" />
+    <script src="libs/header-attrs-2.7.3/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Graphics with <code>ggplot2</code>: <br/>Motivation and Introduction
+### Heike Hofmann &amp; Susan Vanderplas
+
+---
+
+
+
+
+class: middle,center,inverse
+# Motivation
+
+---
+class:inverse
+background-color: #000
+
+![The Hertzsprung-Russell Diagram](images/HR-diagram-1.png)
+
+- Communication
+- Ability to see the data can lead to new insights
+
+???
+
+When drawn well, statistical graphics help us understand our data and see things that we didn't know were there. The relationship between star magnitude, star color, and spectral class wasn't well understood until someone created a chart like this that showed the color index (or spectral class) against the absolute brightness. Then, it was much easier to see that the chart described a life-cycle - stars start out in the main sequence, and then become giants, dwarfs, or slowly change spectral class over time as they cool down in temperature.
+
+Well designed graphs can help us understand the natural phenomenon behind the raw numerical data we've collected.
+
+---
+class: center, middle, inverse
+
+# Overview: Types of Graphs
+
+---
+
+## Basic
+
+
+.pull-left[
+**One Variable**
+- Discrete
+  - Bar Chart
+  - Pie Chart
+  
+- Continuous
+  - Stem and Leaf Plots
+  - Histograms
+  
+]
+
+.pull-right[
+**Two variables**
+- Continuous X, Continuous Y
+  - Scatterplots    
+  (w/ and w/o trend lines)
+  
+- Maps
+]
+
+
+
+![](00-ggplot-intro_files/figure-html/beg-1.png)&lt;!-- --&gt;
+
+---
+# More "Fancy"
+
+.pull-left[
+- Parallel Coordinate Plots
+- Mosaic Plots
+- Radar Charts
+- Heat Maps
+].pull-right[
+- Density Plots
+- Violin Plots
+- Social Network Plots
+]
+
+![](00-ggplot-intro_files/figure-html/int-1.png)&lt;!-- --&gt;![](00-ggplot-intro_files/figure-html/int-2.png)&lt;!-- --&gt;
+
+---
+## `ggplot2`: Grammar of Graphics in R
+
+- Wildly popular package for statistical graphics: over 2.5 million downloads from CRAN in 2017 (several thousand times per day)
+- Developed by Hadley Wickham (An ISU Alumni and Heike's student)
+- Designed to adhere to good graphical practices
+- Constructs plots using the concept of layers
+- Supports a wide variety plot types and extensions
+- Python clone: [plotnine](https://monashdatafluency.github.io/python-workshop-base/modules/plotting_with_ggplot/) (link to online workshop slides)
+
+### References
+
+- ggplot2: Elegant Graphics for Data Analysis (book) or [online version](https://ggplot2-book.org/) for reference
+- [Cheat Sheet for ggplot2](https://github.com/rstudio/cheatsheets/blob/master/data-visualization-2.1.pdf) - 2 page reference card
+
+---
+## Grammar of Graphics
+
+A graphical representation (plot) consists of:
+
+1. **mappings** (aesthetics; aes):    
+data variables are mapped to graphical elements
+2. **layers**: geometric elements (geoms, such as points, lines, rectangles, text, ...) and statistical transformations (stats, are identity, counts, bins, ...)
+3. **scales**: map values in the data space to values in an aesthetic space (e.g. color, size, shape, but also position)
+4. **coordinate system** (coord): normally Cartesian, but pie charts use e.g. polar coordinates
+5. **facetting**: for small multiples (subsets) and their arrangement
+6. **themes**: fine-tune display items, such as font and its size, color of background, margins, ...
+
+---
+## A short example, dissected
+
+.pull-left[
+
+```r
+library(classdata)
+library(ggplot2)
+ggplot(data = fbiwide, 
+       # Aesthetic mappings
+       aes(x = Burglary, 
+           y = Murder)) +
+  
+  # layer - plot using points
+  geom_point()
+```
+
+Other quantities (scales, stats, coordinate systems) are chosen **automatically**
+using smart defaults which are usually visually appealing
+]
+.pull-right[
+![](00-ggplot-intro_files/figure-html/ggplot2-ex-dissect-1.png)&lt;!-- --&gt;
+]
+
+---
+## Adding additional information
+
+.pull-left[
+
+```r
+library(classdata)
+library(ggplot2)
+
+ggplot(data = fbiwide, 
+       # Aesthetic mappings
+       aes(x = Burglary, 
+           y = Murder,
+           color = Year)) +
+  
+  # layer - plot using points
+  geom_point() 
+```
+]
+.pull-right[
+![](00-ggplot-intro_files/figure-html/ggplot2-ex-dissect2-1.png)&lt;!-- --&gt;
+]
+---
+## Adding additional information
+
+.pull-left[
+
+```r
+library(classdata)
+library(ggplot2)
+
+ggplot(data = fbiwide, 
+       # Aesthetic mappings
+       aes(x = Burglary, 
+           y = Murder,
+           color = State)) +
+  
+  # layer - plot using points
+  geom_point() + 
+  # Skip the legend for now
+  guides(color = F)
+```
+Scales are chosen automatically for continuous and discrete color variables
+]
+.pull-right[
+![](00-ggplot-intro_files/figure-html/ggplot2-ex-dissect3-1.png)&lt;!-- --&gt;
+]
+
+---
+class: inverse
+## Your turn
+
+
+```r
+library(classdata)
+library(ggplot2)
+
+ggplot(data = fbiwide, 
+       # Aesthetic mappings
+       aes(x = Burglary, 
+           y = Murder,
+           color = State)) +
+  
+  # layer - plot using points
+  geom_point() + 
+  # Skip the legend for now
+  guides(color = F)
+```
+
+- Try mapping variables to other aesthetics such as shape and size
+
+- What questions can you answer by modifying this graph?
+
+
+---
+
+# What is a Layer?
+
+
+- it determines the physical representation of the data
+  
+- a plot may have multiple layers
+  - usually all the layers on a plot have something in common, i.e. different views of the same data
+    
+- a layer is composed of four parts:
+    1. data and aesthetic mapping
+    2. a statistical transformation (stat)
+    3. a geometric object (geom)
+    4. a position adjustment
+
+
+???
+
+
+---
+
+# ggplot2: A layered grammar
+
+&lt;img src="00-ggplot-intro_files/figure-html/plots-4-1.png"  /&gt;
+
+
+&lt;style&gt;
+.column-left{
+  float: left;
+  width: 32%;
+  text-align: left;
+}
+.column-center{
+  display: inline-block;
+  width: 34%;
+  text-align: left;
+}
+.column-right{
+  float: right;
+  width: 32%;
+  text-align: left;
+}
+&lt;/style&gt;
+
+.column-left[
+data: diamonds    
+layer:
+
+  - mapping: x = cut, y = count, fill = cut   
+  - geom: bar
+  
+coordinates: Cartesian
+
+]
+
+.column-center[
+data: diamonds    
+layer:
+
+  - mapping: x = 1, y = count, fill = cut 
+  - geom: fill-bar
+  
+coordinates: Cartesian
+]
+
+.column-right[
+
+data: diamonds    
+layer:
+
+  - mapping: x = 1, y = count, fill = cut
+  - geom: fill-bar 
+  
+coordinates: Polar 
+]
+
+
+---
+## Summary
+
+In ggplot2, every graph is composed of layers of: 
+- aesthetic mappings (represented by geoms) with     
+  scales and coordinate systems
+- plot annotations (legend, theme, title, etc.)
+
+&lt;img alt="Building a ggplot with aesthetics, geoms, scales, coordinate systems, and annotations" src="images/build1.png" style="min-width:72%;min-height:150px"/&gt;&lt;img alt="Final result" src="images/build2.png" style="min-width:24%;min-height:150px"/&gt;
+
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
